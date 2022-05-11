@@ -16,7 +16,14 @@ const server = http.createServer((req, res) => {
     console.log('req url:', req.url);
     if (req.url === '/login') {
         return res.end('This is login page');
-    }
+    };
+    if (req.url === '/hello') {
+        return res.end('This is hello page');
+    };
+    if (req.url === '/') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        return res.end('<h1>This is home page</h1>');
+    } //在寫入網頁時可以寫入對應的type，才讓網頁正確轉成html格式
 	res.end(); //代表結束，需寫
 });
 
