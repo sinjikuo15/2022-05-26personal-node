@@ -19,7 +19,7 @@ let sentences = ['你不要', '在那邊', '給我哀北教母'];
 sentences.forEach((sentence) => {
     console.log(cowsay.say({
         text : sentence,
-        e : "^^",
+        e : "@@",
         T : "U "
     }));
 });
