@@ -1,35 +1,40 @@
 // 第一個區塊 內建模組
-const http = require('http');
+const path = require('path');
 
 
 // 第二個區塊 第三方模組(套件)
 
-
+const express = require('express');
 
 // 第三個區塊 自建模組
 
-//上面三個區塊就是指可以引入別人的 內建的 甚至是自己做出來的模組但會依序放的順序
 
-//可以分析網站的那一塊東西 host post hostname search這些
 
-const server = http.createServer((req, res) => {
-	// console.log('第一個參數是瀏覽器對 web server 的 request', req);
-	// console.log('第二個參數是 web 要response 給瀏覽器的內容', res);
-    console.log('req url:', req.url);
-    if (req.url === '/login') {
-        return res.end('This is login page');
-    };
-    if (req.url === '/hello') {
-        return res.end('This is hello page');
-    };
-    if (req.url === '/') {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        return res.end('<h1>This is home page</h1>');
-    } //在寫入網頁時可以寫入對應的type，才讓網頁正確轉成html格式
-	res.end(); //代表結束，需寫
+////////////////////////////////////////////////////////////
+
+const app = express();
+
+//middleware
+app.use((req, res, next) => {
+    console.log('Hello!');
+    next();
 });
 
+app.use((req, res, next) => {
+    console.log('World!');
+    next();
+});
 
-server.listen(3000, () => {
-    console.log('running server on port 3000');
+app.get('/', (req, res) => {
+    // res.writeHead(200, { 'Content-Type': 'text/html' });
+    // res.write('<head><meta charset="utf-8" /></head>')
+    // res.write('<body>')
+    // res.write('<h1>這是首頁</h1>')
+    // res.write('</body>')    
+    // res.end();
+    res.status(200).sendFile(path.join(__dirname, 'views', 'index.html')) //這行是使用express讓上面的做法直接導到index.html葉面去
+});
+
+app.listen(3000, () => {
+    console.log('Web Server is running on port 3000');
 });
