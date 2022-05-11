@@ -1,0 +1,25 @@
+{
+  "name": "2022-05-11-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinjikuo15/2022-05-11-node.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sinjikuo15/2022-05-11-node.js/issues"
+  },
+  "homepage": "https://github.com/sinjikuo15/2022-05-11-node.js#readme",
+  "dependencies": {
+    "cowsay": "^1.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

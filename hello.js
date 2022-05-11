@@ -10,8 +10,8 @@ const sayGoodnight = () => {
 // module.exports.say = sayHello;
 //上面這行是將 say變成 SayHello function
 
-console.log('dirname', __dirname);//(查詢所在資料夾)
-console.log('filename', __filename);//(查詢包含路徑的完整檔案名稱)
+// console.log('dirname', __dirname);//(查詢所在資料夾)
+// console.log('filename', __filename);//(查詢包含路徑的完整檔案名稱)
 // console.log(path.join(__dirname, 'index.js'));可以將組合路徑並合併
 
 module.exports = {
@@ -28,4 +28,4 @@ module.exports = {
 // }; 
 // };
 
-console.log('module', module);
+// console.log('module', module);
