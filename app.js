@@ -10,6 +10,8 @@ const http = require('http');
 
 //上面三個區塊就是指可以引入別人的 內建的 甚至是自己做出來的模組但會依序放的順序
 
+//可以分析網站的那一塊東西 host post hostname search這些
+
 const server = http.createServer((req, res) => {
 	// console.log('第一個參數是瀏覽器對 web server 的 request', req);
 	// console.log('第二個參數是 web 要response 給瀏覽器的內容', res);
