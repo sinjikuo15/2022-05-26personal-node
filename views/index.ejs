@@ -24,11 +24,12 @@
     <br>
     <a href="/login/">login</a>
     <% if (products.length> 0) { %>
-        <% products.forEach((product)=> { %>
+        <% products.forEach((product,)=> { %>
             <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
             <h3>
                 <%= product.title %>
             </h3>
+            
             <% }) %>
                 <% } else { %>
                     <h1>尚無商品</h1>
