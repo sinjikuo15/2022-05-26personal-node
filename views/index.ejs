@@ -7,31 +7,35 @@
     <body>
         <%- include('./includes/navbar') %>
 
-        <div>
-            <h1>Home page</h1>
-            <h1>
-                <%= pageTitle %> :)
-            </h1>
-            <!-- 上面這行是來自aap.js所設定的變數呼叫變數 -->
-            <!-- <img src="/images/fire.jpg" alt=""> -->
-            <!-- images前需要/ 是因為代表在public底下 
-            呼應app.use(express.static(path.join(__dirname, 'public')));
-            這函式的功能 -->
-            <br>
-            <a href="/login/">login</a>
-        </div>
+            <div class="container-md">
+                <h1>
+                    <%= pageTitle %>
+                </h1>
+                <div class="row">
+                    <% if (products.length> 0) { %>
+                        <% products.forEach((product)=> { %>
+                            <div class="col-12 col-md-6 col-lg-4 g-3">
+                                <div class="card h-100">
+                                    <!-- 上面的h-100可以讓卡片長度一樣 -->
+                                    <img src="<%= product.imageUrl %>" class="card-img-top" alt="<%= product.title %>">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= product.title %>
+                                        </h5>
+                                        <p class="card-text">
+                                            <%= product.description %>
+                                        </p>
+                                        <a href="#" class="btn btn-primary">詳細資訊</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <% } else { %>
+                                    <h1>尚無商品</h1>
+                                    <% } %>
+                </div>
 
-        <% if (products.length> 0) { %>
-            <% products.forEach((product,)=> { %>
-                <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
-                <h3>
-                    <%= product.title %>
-                </h3>
-
-                <% }) %>
-                    <% } else { %>
-                        <h1>尚無商品</h1>
-                        <% } %>
+            </div>
     </body>
 
     </html>
