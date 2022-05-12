@@ -14,6 +14,10 @@ const bodyParser = require('body-parser');
 
 ////////////////////////////////////////////////////////////
 const app = express();
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+// 預設路徑就是 views，如果沒有變動，可以省略此設定
+//上面第二行的第二個views只是指取用的資料的位子
 
 //middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -32,11 +36,13 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {//當中介軟體發送一個請求時，執行下面的程式    
-    res.status(200).sendFile(path.join(__dirname, 'views', 'index.html')) //這行是使用express讓上面的做法直接導到index.html葉面去
+    res.status(200).render('index');
+    // res.status(200).sendFile(path.join(__dirname, 'views', 'index.html')) //這行是使用express讓上面的做法直接導到index.html頁面去
 });
 
 app.get('/login', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, 'views', 'login.html')) //這行是使用express讓上面的做法直接導到login.html葉面去
+    res.status(200).render('login');
+    // res.status(200).sendFile(path.join(__dirname, 'views', 'login.html')) //這行是使用express讓上面的做法直接導到login.html頁面去
 });
 
 
@@ -52,7 +58,8 @@ app.post('/login', (req, res) => {
 
 app.get('*', (req, res) => { 
     //代表所有的網址都會導到404頁面去(只要前面沒有設定的頁面)，所以須放在最下面。
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
+    res.status(404).render('404');
+    // res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
 });
 
 app.listen(3000, () => {
