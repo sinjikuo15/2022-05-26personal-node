@@ -26,13 +26,12 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    // res.writeHead(200, { 'Content-Type': 'text/html' });
-    // res.write('<head><meta charset="utf-8" /></head>')
-    // res.write('<body>')
-    // res.write('<h1>這是首頁</h1>')
-    // res.write('</body>')    
-    // res.end();
+    
     res.status(200).sendFile(path.join(__dirname, 'views', 'index.html')) //這行是使用express讓上面的做法直接導到index.html葉面去
+});
+app.get('/login', (req, res) => {
+    
+    res.status(200).sendFile(path.join(__dirname, 'views', 'login.html')) //這行是使用express讓上面的做法直接導到login.html葉面去
 });
 
 app.listen(3000, () => {
