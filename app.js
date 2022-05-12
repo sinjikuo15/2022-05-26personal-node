@@ -63,7 +63,9 @@ app.post('/login', (req, res) => {
         console.log('欄位尚未填寫完成')
     }
 });
-
+app.post('/logout',(req,res) =>{
+    res.redirect('/login');
+});
 
 app.get('*', (req, res) => {
     //代表所有的網址都會導到404頁面去(只要前面沒有設定的頁面)，所以須放在最下面。
