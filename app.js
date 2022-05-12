@@ -37,7 +37,8 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => {//當中介軟體發送一個請求時，執行下面的程式    
     res.status(200).render('index', {
-        pageTitle: 'Book Your Books online',
+        path:'/',
+        pageTitle: '訂購',
         products, //=products : products
     });
     // res.status(200).sendFile(path.join(__dirname, 'views', 'index.html')) //這行是使用express讓上面的做法直接導到index.html頁面去
@@ -45,6 +46,8 @@ app.get('/', (req, res) => {//當中介軟體發送一個請求時，執行下�
 
 app.get('/login', (req, res) => {
     res.status(200).render('login', {
+        path:'/login',
+        pageTitle:'登入',
         happyTime: 'wish you have a good day',
 
     });
@@ -65,7 +68,9 @@ app.post('/login', (req, res) => {
 app.get('*', (req, res) => {
     //代表所有的網址都會導到404頁面去(只要前面沒有設定的頁面)，所以須放在最下面。
     res.status(404).render('404', {
-        notFind: 'No find sorry :('
+        path:'*',
+        pageTitle:'404',
+        notFind: 'No find sorry :(',
     });
     // res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
 });
