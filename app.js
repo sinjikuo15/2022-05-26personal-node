@@ -5,19 +5,19 @@ const path = require('path');
 // 第二個區塊 第三方模組(套件)
 
 const express = require('express');
+const bodyParser = require('body-parser');
+
 
 // 第三個區塊 自建模組
 
 
 
 ////////////////////////////////////////////////////////////
-const bodyParser = require('body-parser');
 const app = express();
 
 //middleware
 app.use(express.static(path.join(__dirname, 'public')));
 //抓取在public底下的資源的意思，靜態資源的關係所以需使用static
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
@@ -36,17 +36,23 @@ app.get('/', (req, res) => {//當中介軟體發送一個請求時，執行下�
 });
 
 app.get('/login', (req, res) => {
-    
     res.status(200).sendFile(path.join(__dirname, 'views', 'login.html')) //這行是使用express讓上面的做法直接導到login.html葉面去
 });
 
+
 app.post('/login', (req, res) => {
-    const { email, password } =req.body;
-    if (email && password ){
+    const { email, password } = req.body;
+    if (email && password) {
         res.redirect('/') //當email跟password有資料 導頁到/頁面
-    }else{
+    } else {
         console.log('欄位尚未填寫完成')
     }
+});
+
+
+app.get('*', (req, res) => { 
+    //代表所有的網址都會導到404頁面去(只要前面沒有設定的頁面)，所以須放在最下面。
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
 });
 
 app.listen(3000, () => {
