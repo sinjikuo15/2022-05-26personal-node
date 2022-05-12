@@ -1,38 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include('./includes/header') %>
     <title>Page not found</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <style>
-        /* .container {
-            display: flex;
-            justify-content: center;
-        } */
-    </style>
-</head>
+    <link rel="stylesheet" href="/styles/main.css">
 
-<body>
-    <div class="container ">
+    </head>
 
-        <h1 >
-            <%= notFind %>
-        </h1>
-        <div class="alert alert-danger mt-5 " role="alert">
-            看來發生了點錯誤 :(
+    <body>
+        <div class="container text-center">
+
+            <h1>
+                <%= notFind %>
+            </h1>
+            <div class="alert alert-danger mt-5 " role="alert">
+                看來發生了點錯誤 :(
+            </div>
+
+
         </div>
-        <br>
-        <img src="/images/404.png" alt="">
-
-    </div>
-
+        <div class="container d-flex justify-content-center">
+            <img src="/images/404.png" alt="">
+        </div>
 
 
 
-</body>
+    </body>
 
-</html>
+    </html>
