@@ -10,6 +10,9 @@ const bodyParser = require('body-parser');
 
 // 第三個區塊 自建模組
 const authRoutes = require('./routes/auth');
+const shopRoutes = require('./routes/shop');
+const errorRoutes = require('./routes/404');
+
 
 
 ////////////////////////////////////////////////////////////
@@ -35,6 +38,12 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(authRoutes);
+app.use(shopRoutes);
+// app.use(errorRoutes);
+
+
+//放到shop.js去
 app.get('/', (req, res) => {//當中介軟體發送一個請求時，執行下面的程式    
     res.status(200).render('index', {
         path:'/',
@@ -44,32 +53,38 @@ app.get('/', (req, res) => {//當中介軟體發送一個請求時，執行下�
     // res.status(200).sendFile(path.join(__dirname, 'views', 'index.html')) //這行是使用express讓上面的做法直接導到index.html頁面去
 });
 
-app.use(authRoutes);
+
+
+app.listen(3000, () => {
+    console.log('Web Server is running on port 3000');
+});
+
 
 //放到auth.js去了
-// app.get('/login', (req, res) => {
-//     res.status(200).render('login', {
-//         path:'/login',
-//         pageTitle:'登入',
-//         happyTime: 'wish you have a good day',
+app.get('/login', (req, res) => {
+    res.status(200).render('login', {
+        path:'/login',
+        pageTitle:'登入',
+        happyTime: 'wish you have a good day',
 
-//     });
-//     // res.status(200).sendFile(path.join(__dirname, 'views', 'login.html')) //這行是使用express讓上面的做法直接導到login.html頁面去
-// });
+    });
+    // res.status(200).sendFile(path.join(__dirname, 'views', 'login.html')) //這行是使用express讓上面的做法直接導到login.html頁面去
+});
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    if (email && password) {
+        res.redirect('/') //當email跟password有資料 導頁到/頁面
+    } else {
+        console.log('欄位尚未填寫完成')
+    }
+});
+app.post('/logout',(req,res) =>{
+    res.redirect('/login');
+});
 
 
-// app.post('/login', (req, res) => {
-//     const { email, password } = req.body;
-//     if (email && password) {
-//         res.redirect('/') //當email跟password有資料 導頁到/頁面
-//     } else {
-//         console.log('欄位尚未填寫完成')
-//     }
-// });
-// app.post('/logout',(req,res) =>{
-//     res.redirect('/login');
-// });
-
+//被放到404.js去了
 app.get('*', (req, res) => {
     //代表所有的網址都會導到404頁面去(只要前面沒有設定的頁面)，所以須放在最下面。
     res.status(404).render('404', {
@@ -80,11 +95,8 @@ app.get('*', (req, res) => {
     // res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
 });
 
-app.listen(3000, () => {
-    console.log('Web Server is running on port 3000');
-});
 
-
+//一樣在shop.js
 const products = [
     {
         title: '四月是你的謊言 1',
