@@ -7,7 +7,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 // const Sequelize = require('sequelize'); 
-
+const session = require('express-session');
 
 
 // 第三個區塊 自建模組
@@ -31,8 +31,22 @@ app.set('views', 'views');
 //middleware
 app.use(express.static(path.join(__dirname, 'public')));
 //抓取在public底下的資源的意思，靜態資源的關係所以需使用static
-app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(session({ 
+	secret: 'sessionToken',  // 加密用的字串
+	resave: false,   // 沒變更內容是否強制回存
+	saveUninitialized: false ,  // 新 session 未變更內容是否儲存
+	cookie: {
+		maxAge: 10000 // session 狀態儲存多久？單位為毫秒
+	}
+}));    
+app.use(bodyParser.urlencoded({ extended: false }));
+//bodyParser 是中介軟體解析資料
+
+app.use((req,res, next) => {
+    res.locals.isLogin = req.session.isLogin || false;
+    next();
+}) 
 
 app.use((req, res, next) => {
     console.log('Hello!');
