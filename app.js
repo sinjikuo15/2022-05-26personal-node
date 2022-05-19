@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 
 
 // 第三個區塊 自建模組
-
+const authRoutes = require('./routes/auth');
 
 
 ////////////////////////////////////////////////////////////
@@ -44,28 +44,31 @@ app.get('/', (req, res) => {//當中介軟體發送一個請求時，執行下�
     // res.status(200).sendFile(path.join(__dirname, 'views', 'index.html')) //這行是使用express讓上面的做法直接導到index.html頁面去
 });
 
-app.get('/login', (req, res) => {
-    res.status(200).render('login', {
-        path:'/login',
-        pageTitle:'登入',
-        happyTime: 'wish you have a good day',
+app.use(authRoutes);
 
-    });
-    // res.status(200).sendFile(path.join(__dirname, 'views', 'login.html')) //這行是使用express讓上面的做法直接導到login.html頁面去
-});
+//放到auth.js去了
+// app.get('/login', (req, res) => {
+//     res.status(200).render('login', {
+//         path:'/login',
+//         pageTitle:'登入',
+//         happyTime: 'wish you have a good day',
+
+//     });
+//     // res.status(200).sendFile(path.join(__dirname, 'views', 'login.html')) //這行是使用express讓上面的做法直接導到login.html頁面去
+// });
 
 
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    if (email && password) {
-        res.redirect('/') //當email跟password有資料 導頁到/頁面
-    } else {
-        console.log('欄位尚未填寫完成')
-    }
-});
-app.post('/logout',(req,res) =>{
-    res.redirect('/login');
-});
+// app.post('/login', (req, res) => {
+//     const { email, password } = req.body;
+//     if (email && password) {
+//         res.redirect('/') //當email跟password有資料 導頁到/頁面
+//     } else {
+//         console.log('欄位尚未填寫完成')
+//     }
+// });
+// app.post('/logout',(req,res) =>{
+//     res.redirect('/login');
+// });
 
 app.get('*', (req, res) => {
     //代表所有的網址都會導到404頁面去(只要前面沒有設定的頁面)，所以須放在最下面。
