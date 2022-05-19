@@ -1,5 +1,5 @@
 const getLogin = (req, res) => {
-    res.status(200).render('login', {
+    res.status(200).render('auth/login', {
         path: '/login',
         pageTitle: '登入',
         happyTime: 'wish you have a good day',

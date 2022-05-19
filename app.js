@@ -16,6 +16,7 @@ const authRoutes = require('./routes/auth');
 const shopRoutes = require('./routes/shop');
 const errorRoutes = require('./routes/404');
 const Product = require('./models/product');
+const User = require('./models/user');
 
 
 
@@ -51,6 +52,7 @@ app.use(errorRoutes);
 database
     .sync({ force: true }) //每次啟動時將資料還原
     .then((result) => {
+        User.create({ displayName: 'Admin', email: 'admin@skoob.com', password: '11111111'});//創建一個使用者
         //藉由Product 把products的資料加進去
         Product.bulkCreate(products);
         app.listen(3000, () => {
@@ -81,3 +83,4 @@ const products = [
         imageUrl: 'https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/062/76/0010627615.jpg&v=5315ab5f&w=348&h=348'
     },
 ];
+
