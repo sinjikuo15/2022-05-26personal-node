@@ -6,9 +6,11 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const Sequelize = require('sequelize'); 
 
 
 // 第三個區塊 自建模組
+const database = require('./utils/database');
 const authRoutes = require('./routes/auth');
 const shopRoutes = require('./routes/shop');
 const errorRoutes = require('./routes/404');
@@ -43,6 +45,7 @@ app.use(shopRoutes);
 app.use(errorRoutes);
 
 
+
 //放到shop.js去
 // app.get('/', (req, res) => {//當中介軟體發送一個請求時，執行下面的程式    
 //     res.status(200).render('index', {
@@ -53,11 +56,6 @@ app.use(errorRoutes);
 //     // res.status(200).sendFile(path.join(__dirname, 'views', 'index.html')) //這行是使用express讓上面的做法直接導到index.html頁面去
 // });
 
-
-
-app.listen(3000, () => {
-    console.log('Web Server is running on port 3000');
-});
 
 
 //放到auth.js去了
@@ -117,3 +115,15 @@ app.listen(3000, () => {
 //         imageUrl: 'https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/062/76/0010627615.jpg&v=5315ab5f&w=348&h=348'
 //     },
 // ]; // 宣告常數 products 同時賦予它 [] 空陣列
+
+
+database
+	.sync()
+	.then((result) => {
+		app.listen(3000, () => {
+			console.log('Web Server is running on port 3000');
+		});
+	})
+	.catch((err) => {
+		console.log('create web server error: ', err);
+	});

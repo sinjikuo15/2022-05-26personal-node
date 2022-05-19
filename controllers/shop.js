@@ -9,7 +9,7 @@ const getShop = (req, res) => {//當中介軟體發送一個請求時，執行�
 
 module.exports = {
     getShop,
-};
+};//要跟要get的地方一樣的名稱
 
 const products = [
     {
