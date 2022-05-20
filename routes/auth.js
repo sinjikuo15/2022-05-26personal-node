@@ -15,6 +15,8 @@ router.post('/login', authController.postLogin);
 
 router.post('/logout', authController.postLogout);
 
+router.post('/signup', authController.postSignup);
+
 //上方的authController 都是找到controllers資料夾裡面的auth.js對應的module exports
 
 module.exports = router
