@@ -6,6 +6,13 @@
         <%- include('../includes/navbar') %>
 
             <h1>Member Login</h1>
+            <% if (errorMessage) { %>
+                <div class="col-8">
+                  <div class="alert alert-danger" role="alert">
+                    <%= errorMessage %>
+                  </div>
+                </div>
+              <% } %>
             <form action="/login" method="POST">
                 <!-- /login代表下方的submit發生的時，資料所送的位子 -->
                 <div>

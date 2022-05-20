@@ -3,7 +3,8 @@
     <a class="navbar-brand" href="/">
       Navbar
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -15,16 +16,16 @@
           <li class="nav-item">
             <a class="nav-link <%= path === '/login' ? 'active' : '' %>" aria-current="page" href="/login">Login</a>
           </li>
-        <li class="nav-item">
-          <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" aria-current="page" href="/signup">Signup</a>
-        </li>
-        <% } %>
+          <li class="nav-item">
+            <a class="nav-link <%= path === '/signup' ? 'active' : '' %>" aria-current="page" href="/signup">Signup</a>
+          </li>
+          <% } %>
       </ul>
       <% if (isLogin) { %>
         <form class="d-flex" action="/logout" method="POST">
           <button class="btn btn-outline-primary">Logout</button>
         </form>
-      <% } %>
+        <% } %>
     </div>
   </div>
 </nav>

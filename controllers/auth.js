@@ -1,13 +1,21 @@
 const User = require('../models/user');
 
 const getLogin = (req, res) => {
+    const errorMessage = req.flash('errorMessage')[0];
     res.status(200).render('auth/login', {
         path: '/login',
         pageTitle: '登入',
+        errorMessage, //呼應上面的功能
         happyTime: 'wish you have a good day',
-    });    
+    });
 };
-
+const getSignup = (req, res) => {
+    res.status(200)
+        .render('auth/signup', {
+            path:"/signup",
+            pageTitle: 'Signup',
+        });
+};
 // const postLogin = (req, res) => {
 //     const { email, password } = req.body;
 //     if (email && password) {
@@ -21,18 +29,18 @@ const postLogin = (req, res) => {
     const { email, password } = req.body;
 
     //對應於app.js的bodyParser解構出來的資料
-    User.findOne({ where: { email }})
+    User.findOne({ where: { email } })
         .then((user) => {
             if (!user) {
-                console.log('login: 找不到此 user 或密碼錯誤');
+                req.flash('errorMessage', '錯誤的 Email 或 Password。');
                 return res.redirect('/login');
             }
             if (user.password === password) {
                 console.log('login: 成功');
-                req.session.isLogin = true ;
+                req.session.isLogin = true;
                 return res.redirect('/')
-            } 
-            console.log('login: 找不到此 user 或密碼錯誤');
+            }
+            req.flash('errorMessage', '錯誤的 Email 或 Password。');
             res.redirect('/login');
         })
         .catch((err) => {
@@ -49,6 +57,7 @@ const postLogout = (req, res) => {
 
 module.exports = {
     getLogin,
+    getSignup,
     postLogin,
     postLogout
 };

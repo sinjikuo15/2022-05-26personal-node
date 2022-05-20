@@ -8,6 +8,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // const Sequelize = require('sequelize'); 
 const session = require('express-session');
+const connectFlash = require('connect-flash');
 
 
 // 第三個區塊 自建模組
@@ -43,7 +44,8 @@ app.use(session({
 	cookie: {
 		maxAge: oneDay // session 狀態儲存多久？單位為毫秒
 	}
-}));    
+}));   
+app.use(connectFlash()); 
 app.use(bodyParser.urlencoded({ extended: false }));
 //bodyParser 是中介軟體解析資料
 
