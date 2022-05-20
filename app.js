@@ -70,7 +70,7 @@ app.use(errorRoutes);
 
 
 database
-    .sync({ force: true }) //每次啟動時將資料還原
+    // .sync({ force: true }) //每次啟動時將資料還原
     .then((result) => {
         User.create({ displayName: 'Admin', email: 'admin@skoob.com', password: '11111111'});//創建一個使用者
         //藉由Product 把products的資料加進去
