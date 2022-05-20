@@ -41,9 +41,11 @@ const postLogin = (req, res) => {
 };
 
 const postLogout = (req, res) => {
-    req.session.isLogin = false;
-    res.redirect('/login');
-}
+    req.session.destroy((err) => {
+        console.log('session destroy() error: ', err);
+        res.redirect('/login');
+    });
+};
 
 module.exports = {
     getLogin,

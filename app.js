@@ -23,12 +23,16 @@ const User = require('./models/user');
 
 ////////////////////////////////////////////////////////////
 const app = express();
+const port =3000;
+const oneDay=60 * 60 * 24 * 1000; //一天
+//用法類似css的自訂變數
+
+//middleware
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 // 預設路徑就是 views，如果沒有變動，可以省略此設定
 //上面第二行的第二個views只是指取用的資料的位子
 
-//middleware
 app.use(express.static(path.join(__dirname, 'public')));
 //抓取在public底下的資源的意思，靜態資源的關係所以需使用static
 
@@ -37,7 +41,7 @@ app.use(session({
 	resave: false,   // 沒變更內容是否強制回存
 	saveUninitialized: false ,  // 新 session 未變更內容是否儲存
 	cookie: {
-		maxAge: 10000 // session 狀態儲存多久？單位為毫秒
+		maxAge: oneDay // session 狀態儲存多久？單位為毫秒
 	}
 }));    
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -69,8 +73,8 @@ database
         User.create({ displayName: 'Admin', email: 'admin@skoob.com', password: '11111111'});//創建一個使用者
         //藉由Product 把products的資料加進去
         Product.bulkCreate(products);
-        app.listen(3000, () => {
-            console.log('Web Server is running on port 3000');
+        app.listen(port, () => { //server運行在3000
+            console.log(`Web Server is running on ${port}`);
         });
     })
     .catch((err) => {
